@@ -25,5 +25,57 @@ Seasonality is a fundamental challenge for life on Earth and energy storage prio
 
 **Keywords:** Chiroptera, hibernation, life-history, reproduction, torpor, energetics, migration
 
+## Meta-data
+Column descriptors for `raw_dat.csv` are as follows:
+
+- pub_ID: Unique identifier of the study.
+- pub_year: Year of the publication
+- first_author: Last name of the first author.
+- source: Where the values were taken (text, figures, tables, raw data). 
+- suborder: Suborder of the species.
+- family: Family of the species.
+- species: Full species name as stated in the study.
+- species_OTL: Full species name as stated in the [Open Tree of Life](https://tree.opentreeoflife.org/opentree/argus/opentree15.1@ott93302).
+- roost_type: Recorded wintering roost of the study site (cave, tree, broad).
+- pd: Whether Pd was detected (yes, blank).
+- country: Location of the study site at country level.
+- hemisphere: Location of the study site relative to the equator (northern, southern)
+- lat: Latitude of the study site (decimal degrees).
+- long: Longitude of the study site. (decimal degrees).
+- clim_ID: Unique identifier of the study site climate following the [Köppen climate classification](https://en.wikipedia.org/wiki/K%C3%B6ppen_climate_classification).
+- study_year: The year/s when the study was conducted.
+- mean_year_study: The average year when the study was conducted (for studies with multiple years).
+- sex: Sex of the species (Female, Male, Both).
+- age: Age of the species (Adult, Juvenile).
+- date_pre: The approximate date when the pre-winter body mass was taken.
+- date_max: The approximate date when the maximum body mass was taken.
+- date_post: The approximate date when the post-winter body mass was taken.
+- month_num_pre: The month when the pre-winter body mass was taken (numeric).
+- month_num_max: The month when the maximum body mass was taken (numeric).
+- month_num_post: The month when the post-winter body mass was taken (numeric).
+- days_dif: The number of days between measurements.
+- month_pre: The month when the pre-winter body mass was taken (Gregorian).
+- month_max: The month when the maximum body mass was taken (Gregorian).
+- month_post: The month when the post-winter body mass was taken (Gregorian).
+- value_pre_mean: Average body mass value pre-winter (grams).
+- value_pre_SD: Standard deviation of the body mass value pre-winter.
+- pre_n: Sample size when the pre-winter body mass was taken (numeric).
+- value_max_mean: Average body mass value at the start of winter (grams).
+- value_max_SD:  Standard deviation of the body mass value at the start of winter.
+- max_n: Sample size when the maximum body mass was taken (numeric).
+- value_post_mean: Average body mass value post-winter (grams).
+- value_post_SD: Standard deviation of the body mass value post-winter.
+- post_n: Sample size when the post-winter body mass was taken (numeric).
+- pre_post: Categorised name whether change in body mass was pre-winter or post-winter (pre, post).
+- mass_g: Average body mass value post-winter (grams).
+- abs_diff: The absolute difference between value_max_mean and either value_pre_mean or value_post_mean.
+- abs_vi: The absolute variance between value_max_mean and either value_pre_mean or value_post_mean.
+- rel_diff: The relative difference between value_max_mean and either value_pre_mean or value_post_mean.
+- lnRR: The log response ratio between value_max_mean and either value_pre_mean or value_post_mean.
+- lnRR_vi: The log response ratio variance between value_max_mean and either value_pre_mean or value_post_mean. 
+- notes: Extra notes regarding the study.
+- title: Title of the study.
+- ref: Link to the study.
+
 ## License
 This repository is provided by the authors under the MIT License ([MIT](http://opensource.org/licenses/MIT)).
