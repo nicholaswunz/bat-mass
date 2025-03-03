@@ -15,9 +15,9 @@ This repository contains code and data needed to reproduce the article:
 - `batmass_analysis.R` - Data cleaning, analysis and figure production.
 
 **External files**
-- `wc2.1_2.5m_bio_1.tif` - WorldClim bio1 - Mean annual surface temperature.
-- `wc2.1_2.5m_bio_7.tif` - WorldClim bio7 - Rainfall seasonality.
-- `wc2.1_2.5m_bio_14.tif` - WorldClim bio14 - Temperature seasonality.
+- `wc2.1_2.5m_bio_1.tif` - [WorldClim bio1](https://www.worldclim.org/data/bioclim.html) - Mean annual surface temperature.
+- `wc2.1_2.5m_bio_4.tif` - [WorldClim bio4](https://www.worldclim.org/data/bioclim.html) - Temperature seasonality.
+- `wc2.1_2.5m_bio_15.tif` - [WorldClim bio14](https://www.worldclim.org/data/bioclim.html) - Rainfall seasonality.
 - `NIRv_sd_rast.tif` - Gross primary production seasonality as NIRv.
 
 ## Abstract
