@@ -37,7 +37,7 @@ Column descriptors for `raw_dat.csv` are as follows:
 - species: Full species name as stated in the study.
 - species_OTL: Full species name as stated in the [Open Tree of Life](https://tree.opentreeoflife.org/opentree/argus/opentree15.1@ott93302).
 - roost_type: Recorded wintering roost of the study site (cave, tree, broad).
-- pd: Whether Pd was detected (yes, blank).
+- pd: Whether the fungal pathogen, *Pseudogymnoascus destructans*, was detected (yes, blank).
 - country: Location of the study site at country level.
 - hemisphere: Location of the study site relative to the equator (northern, southern)
 - lat: Latitude of the study site (decimal degrees).
