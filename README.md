@@ -5,11 +5,12 @@ Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)
 
 This repository contains code and data needed to reproduce the article:
 
-**Wu N. C., Villada-Cadavid, T., Welbergen J. A., & Turbill C.** (In submission) Seasonal fattening among bat populations globally: storing energy for survival in a changing world.
+**Wu N. C., Villada-Cadavid, T., Welbergen J. A., & Turbill C.** (Accepted) Seasonal fattening among bat populations globally: storing energy for survival in a changing world. *Ecology Letters*,
 
 
 **Raw data**
 - `raw_dat.csv` - Raw data used for the analysis.
+- `mass_fat_relationship.csv` - Data used for validating the relationship between body mass and body fat.
 
 ***R*** **code**
 - `batmass_analysis.R` - Data cleaning, analysis and figure production.
@@ -21,7 +22,7 @@ This repository contains code and data needed to reproduce the article:
 - `NIRv_sd_rast.tif` - Gross primary production seasonality as NIRv.
 
 ## Abstract
-Seasonality is a fundamental challenge for life on Earth and energy storage prior to colder and drier periods by fattening is a common strategy of animals for survival. Fattening should reflect a trade-off between an expected seasonal energy deficit and the costs of increased body mass, which are particularly important to flying endotherms. We applied a phylogenetic, multilevel meta-analysis to published data on body mass change (Δ*M*<sub>b</sub>), a proxy of fat storage, among bat populations over low productivity periods (winter in temperate regions and dry periods in the tropics) to examine its relationship with global variation in yearly average and seasonality of local climates. We found that Δ*M*<sub>b</sub> increased with decreasing mean annual surface temperature (MAST) but Δ*M*<sub>b</sub> also increased at higher MAST with higher seasonality of rainfall. Seasonal use of body energy reserves by bats is predicted to be widespread in warm, seasonal climates at low latitudes but is poorly studied compared to cold temperate regions. We also found that, in colder climates only, overwinter mass loss was less for females than males, as predicted by the 'thrifty females' hypothesis, and furthermore, that Δ*M*<sub>b</sub> has increased with year of study in warm climates, possibly linked to effects of global climate change on their energetics. Our quantitative synthesis describes the intrinsic and environmental factors determining the extent of seasonal reliance on stored body energy reserves among bat populations, and highlights the global importance of seasonal fattening for survival in this diverse and widespread mammal group.
+Seasonality is a fundamental challenge for life on Earth and energy storage prior to colder and drier periods by fattening is a common strategy for survival. Fattening should reflect a trade-off between an expected seasonal energy deficit and the costs of increased body mass, which are particularly important to flying endotherms. We examined body mass change (Δ*M*<sub>b</sub>), a proxy of fat storage, among bat populations over low productivity periods with global variation in yearly average and seasonality of local climates. We found that Δ*M*<sub>b</sub> increased with decreasing mean annual surface temperature (MAST) but Δ*M*<sub>b</sub> also increased at higher MAST with higher seasonality of rainfall. Seasonal use of body energy reserves by bats is predicted to be widespread in warm, seasonal climates at low latitudes but is poorly studied compared to cold temperate regions. In colder climates only, females lost less mass than males over winter, supporting the 'thrifty females' hypothesis, and Δ*M*<sub>b</sub> has increased with year of study in warm climates, possibly linked to effects of global climate change on their energetics. Our quantitative synthesis highlights how intrinsic and environmental factors shape seasonal fattening in bats, and its global importance for survival in this diverse and widespread mammal group.
 
 **Keywords:** Chiroptera, hibernation, life-history, reproduction, torpor, energetics, migration
 
@@ -31,7 +32,7 @@ Column descriptors for `raw_dat.csv` are as follows:
 - pub_ID: Unique identifier of the study.
 - pub_year: Year of the publication
 - first_author: Last name of the first author.
-- source: Where the values were taken (text, figures, tables, raw data). 
+- source: Where values were taken (text, figures, tables, raw data). 
 - suborder: Suborder of the species.
 - family: Family of the species.
 - species: Full species name as stated in the study.
@@ -74,6 +75,15 @@ Column descriptors for `raw_dat.csv` are as follows:
 - lnRR: The log response ratio between value_max_mean and either value_pre_mean or value_post_mean.
 - lnRR_vi: The log response ratio variance between value_max_mean and either value_pre_mean or value_post_mean. 
 - notes: Extra notes regarding the study.
+- title: Title of the study.
+- ref: Link to the study.
+
+Column descriptors for `mass_fat_relationship.csv` are as follows:
+- pub_ID: Unique identifier of the study.
+- source: Where values were taken (text, figures, tables, raw data).
+- r2: The *R*-sqaured values obtained from the study
+- species: Full species name as stated in the study.
+- sex: Sex of the species (female, male).
 - title: Title of the study.
 - ref: Link to the study.
 
