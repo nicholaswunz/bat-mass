@@ -8,6 +8,11 @@ This repository contains code and data needed to reproduce the article:
 **Wu N. C., Villada-Cadavid, T., Welbergen J. A., & Turbill C.** (Accepted) Seasonal fattening among bat populations globally: storing energy for survival in a changing world. *Ecology Letters*,
 
 
+When using the data or code from this project, please cite it as:
+
+Wu N. C., Villada-Cadavid, T., Welbergen J. A., & Turbill C. (2025) Accepted version of paper data and code of manuscript: Seasonal fattening among bat populations globally: storing energy for survival in a changing world. Zenodo. DOI: [![DOI](https://zenodo.org/badge/794788712.svg)](https://doi.org/10.5281/zenodo.15447773)
+
+
 **Raw data**
 - `raw_dat.csv` - Raw data used for the analysis.
 - `mass_fat_relationship.csv` - Data used for validating the relationship between body mass and body fat.
