@@ -1,0 +1,11 @@
+pub_ID,source,r2,species,sex,title,ref
+1,Table 2,0.85,Myotis lucifugus,,Common condition indices are no more effective than body mass for estimating fat stores in insectivorous bats,https://academic.oup.com/jmammal/article/99/5/1065/5090129?login=true
+1,Table 2,0.65,Lasionycteris noctivagans,,,
+1,Table 2,0.86,Lasiurus borealis,,,
+1,Table 2,0.4,Tadarida brasiliensis,,,
+1,Table 2,0.81,Myotis velifer,,,
+2,Fig 3,0.83,Myotis lucifugus,,Changes in body mass and fat reserves in pre-hibernating little brown bats (Myotis lucifugus),https://www.tandfonline.com/doi/abs/10.1080/11956860.1998.11682443
+3,Fig S2,0.89,Myotis lucifugus,,Higher fat stores contribute to persistence of little brown bat populations with white-nose syndrome,https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/1365-2656.12954
+4,Fig 2,0.79,Myotis myotis,,Energy balance of hibernating mouse-eared batMyotis myotis: a study with a TOBEC instrument,https://link.springer.com/article/10.1007/BF03192411
+5,Fig 1,0.92,Myotis velifer,female,Lean Mass Dynamics in Hibernating Bats and Implications for Energy and Water Budgets,https://www.journals.uchicago.edu/doi/abs/10.1086/720160
+5,Fig 1,0.74,Myotis velifer,male,,
