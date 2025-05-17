@@ -27,12 +27,9 @@ mytheme <- function() {
     )
 } # set up plot theme
 
-# Set directory
-data_path <- file.path("/Users/nicholaswu/Library/CloudStorage/OneDrive-WesternSydneyUniversity/WNS project - WSU/M - Mass change")
-
 ## RAW DATA ## -----------------------------------------------------------------
 # Load raw data
-raw_dat <- read.csv(file.path(data_path, "raw_data.csv")) %>%
+raw_dat <- read.csv("https://github.com/nicholaswunz/bat-mass/raw/refs/heads/main/data/raw_data.csv") %>%
   dplyr::select(-c(notes, title, ref)) %>%
   dplyr::mutate(lat_abs     = abs(lat),
                 lnMass      = log(mass_g),
@@ -42,9 +39,10 @@ raw_dat <- read.csv(file.path(data_path, "raw_data.csv")) %>%
                 )
 
 ## CLIMATE DATA ## -------------------------------------------------------------
-# WorldClim data
-# Import all files as a list 
-rastlist <- list.files(path = "/Users/nicholaswu/Library/CloudStorage/OneDrive-WesternSydneyUniversity/WNS project - WSU/M - Mass change/climate/wc2.1_2.5m", 
+# Download WorldCLim .tif files () to local folder
+
+# Import all files as a list from your local folder
+rastlist <- list.files(path = "/LOCAL_FOLDER", 
                        pattern = '.tif$', all.files = TRUE, full.names = TRUE)
 
 # Stack all layers
@@ -62,7 +60,7 @@ values <- data.frame(terra::extract(bioclim, xy)) %>%
   dplyr::mutate(T_season_sd    = T_season / 100) # Temperature seasonality (standard deviation *100)
 
 # Load GPP data
-NIRv_sd_rast     <- raster::raster(file.path(data_path, "NIRv_sd_rast.tif"))
+NIRv_sd_rast     <- raster::raster("https://github.com/nicholaswunz/bat-mass/raw/refs/heads/main/files/NIRv_sd_rast.tif")
 NIRv_sd_rast_0.5 <- terra::aggregate(NIRv_sd_rast, 10) # resolution to 0.5
 GPP_values       <- data.frame(raster::extract(NIRv_sd_rast_0.5, xy)) %>% rename(GPP_sd = "raster..extract.NIRv_sd_rast_0.5..xy.")
 
@@ -96,7 +94,7 @@ tree <- ape::multi2di(tree, random = TRUE)  # use a randomization approach to de
 # Create the phylogenetic correlation matrix from our phylogenetic tree.
 Acov <- ape::vcv.phylo(tree, corr = FALSE)
 
-## 3 MODELS ## ------------------------------------------------------------------
+## 3 INITIAL MODELS ## ------------------------------------------------------------------
 # Check for multicollinearity. VIF >5 is a problem
 car::vif(lm(lnRR ~ MAST + T_season_sd + rain_season_cv + GPP_sd + mean_year_study + pre_post + lnMass + sex + roost_type + days_dif, data = clim_dat))
 # no values above 5
@@ -177,7 +175,7 @@ summary(final_mod)
 final_mod$sigma2[2] / sum(final_mod$sigma2) # Phylogenetic signal
 orchaRd::r2_ml(final_mod)
 
-## MAST-SEX MODEL ## -----------------------------------------------------------
+## MAST-SEX INT MODEL ## -----------------------------------------------------------
 sex_pre_mod <- metafor::rma.mv(lnRR, lnRR_vi, mods = ~ MAST * sex,
                                 random = list(~1 | species, 
                                               ~1 | species_OTL,
@@ -204,6 +202,8 @@ summary(sex_pre_mod)
 summary(sex_post_mod)
 
 ## FIGURE PRODUCTION ## --------------------------------------------------------
+# Figures were cleaned up for publication using Adobe Illustrator.
+
 # Fig 1
 clim_mod <- lm(rel_diff ~  MAST * rain_season_cv, data = clim_dat)
 summary(clim_mod)
@@ -256,7 +256,6 @@ year_MAST_data <- orchaRd::mod_results(final_mod, mod = "mean_year_study", group
 year_plot <- ggplot(year_MAST_data, aes(x = moderator)) +
   geom_point(data = clim_dat, aes(x = mean_year_study, y = rel_diff), 
              colour = "black", alpha = 0.1) +
-  #geom_ribbon(aes(ymin = lowerCL, ymax = upperCL, fill = condition, linetype = condition), alpha = 0.1) +
   geom_line(aes(y = estimate, linetype = condition, colour = condition)) +
   labs(y = expression(Delta*italic("M")["b"]*" (%)"), x = "Study year", fill = "MAST", colour = "MAST") +
   scale_color_manual(values = c("#4a6fe3", "black", "#d33f6a")) +
@@ -415,9 +414,8 @@ cat_plot <- data.frame(bioclim_bat_df %>%
   labs(y = "% occupancy", x = expression(Delta*italic("M")["b"]*" (%)")) +
   mytheme()
 
-
 ## SUPPLEMENTARY FIGURES ## ----------------------------------------------------
-# Fig S3
+# Fig S4
 MAST_tseason_plot <- bioclim_bat_df %>%
   mutate(MAST = round(MAST, digits = 1),
          T_season = round(T_season / 100, digits = 1),) %>%
@@ -459,11 +457,17 @@ t_rainseason_plot <- bioclim_bat_df %>%
 cowplot::plot_grid(MAST_tseason_plot, MAST_rainseason_plot, t_rainseason_plot, 
                    labels = c("a", "b", "c"),  align = 'v', axis = 'l')
 
+## Reviewer suggestions ## -----------------------------------------------------
+# Run final model with Northern American bats removed (potential influence of WNS). 
+final_mod_NA_removed <- metafor::rma.mv(lnRR, lnRR_vi, mods = ~ MAST * rain_season_cv + MAST * mean_year_study + pre_post + sex,
+                             random = list(~1 | species, 
+                                           ~1 | species_OTL,
+                                           ~1 | pub_ID), 
+                             R = list(species_OTL = Acov),
+                             test = "t", dfs = "contain",
+                             data = clim_dat %>%
+                               dplyr::mutate(species_OTL = stringr::str_replace_all(species_OTL, " ", "_")) %>%
+                               dplyr::filter(!country %in% c("USA", "Canada")) # Remove NA
+)
 
-# Fig S4
-ggplot(clim_dat, aes(x = MAST,y = rel_diff)) +
-  geom_point() +
-  labs(y = expression(Delta*italic("M")["b"]*" (%)"), x = "MAST  (°C)") +
-  mytheme() +
-  facet_wrap(~ family, ncol = 3)
-
+summary(final_mod_NA_removed)
