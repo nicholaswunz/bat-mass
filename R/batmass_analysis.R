@@ -1,7 +1,7 @@
 ## SET UP ## -------------------------------------------------------------------
 # Load library
 #devtools::install_github("daniel1noble/orchaRd", force = TRUE)
-pacman::p_load(tidyverse, ggplot2, cowplot, MuMIn, 
+pacman::p_load(tidyverse, ggplot2, cowplot, ggdist, MuMIn, 
                rotl, ape, metafor, orchaRd, performance, 
                rsm, geodata, terra, sp, raster)
 
@@ -234,7 +234,7 @@ sex_plot <- ggplot(sex_data, aes(x = name, y = estimate)) +
                      colour = "black", alpha = 0.1) +
   geom_linerange(aes(ymin = lowerCL, 
                      ymax = upperCL), color = "black") + 
-  geom_point(size = 3, shape = 21, colour = "black", fill = "black") +
+  geom_point(size = 3, shape = 21, colour = "black", fill = "white") +
   labs(y = expression(Delta*italic("M")["b"]*" (%)"), x = NULL) +
   mytheme() 
 
@@ -286,11 +286,11 @@ ggplot(sex_post_data, aes(x = moderator)) +
 # Fig 4
 # Bat distribution
 world  <- map_data("world")
-bat_sr <- readRDS(file.path(data_path, "bat_all_sr.rds"))
+bat_sr <- readRDS(url("https://github.com/nicholaswunz/bat-mass/raw/refs/heads/main/files/bat_all_sr.rds", method = "libcurl"))
 bioclim_ag <- raster::projectRaster(bioclim, crs = crs(bat_sr), res = 0.25)
 
 bat_ag           <- raster::resample(bat_sr, bioclim_ag)
-bioclim_ag <- raster::stack(bioclim_ag) # convert SpatRaster to RasterStack
+bioclim_ag       <- raster::stack(bioclim_ag) # convert SpatRaster to RasterStack
 bioclim_bat_rast <- raster::stack(bioclim_ag, bat_ag) # merge raster files together
 
 # Categorise mass loss
@@ -458,6 +458,25 @@ cowplot::plot_grid(MAST_tseason_plot, MAST_rainseason_plot, t_rainseason_plot,
                    labels = c("a", "b", "c"),  align = 'v', axis = 'l')
 
 ## Reviewer suggestions ## -----------------------------------------------------
+# Fig. S3 - R2 values
+read.csv("https://github.com/nicholaswunz/bat-mass/raw/refs/heads/main/data/mass_fat_relationship.csv") %>%
+  mutate(ID = "ID") %>%
+  ggplot(aes(x = ID, y = r2)) +
+  # add half-violin
+  ggdist::stat_halfeye(
+    adjust = 0.5, # adjust bandwidth
+    justification = -0.2, # move to the right
+    .width = 0, # remove the slub interval
+    point_colour = NA) +
+  geom_boxplot(
+    width = 0.12,
+    outlier.color = NA, # removing outliers
+    alpha = 0.5) +
+  geom_point() +
+  ylim(0,1) +
+  labs(x = NULL, y = expression(italic("R")^"2")) +
+  mytheme()
+
 # Run final model with Northern American bats removed (potential influence of WNS). 
 final_mod_NA_removed <- metafor::rma.mv(lnRR, lnRR_vi, mods = ~ MAST * rain_season_cv + MAST * mean_year_study + pre_post + sex,
                              random = list(~1 | species, 
