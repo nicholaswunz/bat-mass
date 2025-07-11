@@ -5,7 +5,7 @@ Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)
 
 This repository contains code and data needed to reproduce the article:
 
-**Wu N. C., Villada-Cadavid, T., Welbergen J. A., & Turbill C.** (Accepted) Seasonal fattening among bat populations globally: storing energy for survival in a changing world. *Ecology Letters*,
+**Wu N. C., Villada-Cadavid, T., Welbergen J. A., & Turbill C.** (2025) Seasonal fattening among bat populations globally: storing energy for survival in a changing world. *Ecology Letters*, **28**, e70155
 
 
 When using the data or code from this project, please cite it as:
